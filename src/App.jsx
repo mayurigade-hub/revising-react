@@ -18,4 +18,5 @@ function App() {
   )
 }
 
+//default export is a type of export where we can export only one component from a single file.
 export default App
