@@ -1,20 +1,19 @@
 import './App.css'
-import Title from './Title.jsx'
+import ProductTab from './ProductTab.jsx'
+// import Title from './Title.jsx'
+// import Description from './description.jsx'
 
 //named import is another type of immport where we can import multiple components from a single file.
 //import { Title } from './Title.jsx'
 
-function Description() {
-  return <h1>This is my description!</h1>
-}
-
 function App() {
   return (
     <>
+      <ProductTab />
       {/* rendering title component */}
-      <Title />  
+      {/* <Title />   */}
       {/* rendering description component */}
-      <Description />  
+      {/* <Description />   */}
     </>
   )
 }

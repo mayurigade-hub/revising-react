@@ -2,6 +2,7 @@ function Title() {
   return (
     <>
     <h1>This is my title!</h1>
+    {/* JSX in curly braces is treated as JS expression and will be evaluated and rendered in the UI.  */}
     <p> 2 * 2 = { 2 * 2 } </p>
     </>
   )
