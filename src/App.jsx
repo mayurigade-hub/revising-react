@@ -10,12 +10,12 @@ function Description() {
 
 function App() {
   return (
-    <div>
+    <>
       {/* rendering title component */}
       <Title />  
       {/* rendering description component */}
       <Description />  
-    </div>
+    </>
   )
 }
 
