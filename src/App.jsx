@@ -1,7 +1,8 @@
 import './App.css'
+import Counter from './Counter.jsx'
 // import ProductTab from './ProductTab.jsx'
 // import Msg from './msg.jsx'
-import Form from './Form.jsx'
+// import Form from './Form.jsx'
 // import Title from './Title.jsx'
 // import Description from './description.jsx'
 
@@ -11,7 +12,9 @@ import Form from './Form.jsx'
 function App() {
   return (
     <>
-      <Form />
+      <h1>Let's Learn States in react</h1>
+      <Counter />
+      {/* <Form /> */}
       {/* <Msg userName="Alice" textColor="blue" />
       <ProductTab /> */}
       {/* rendering title component */}
