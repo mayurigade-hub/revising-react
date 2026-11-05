@@ -1,6 +1,7 @@
 import './App.css'
-import ProductTab from './ProductTab.jsx'
-import Msg from './msg.jsx'
+// import ProductTab from './ProductTab.jsx'
+// import Msg from './msg.jsx'
+import Form from './Form.jsx'
 // import Title from './Title.jsx'
 // import Description from './description.jsx'
 
@@ -10,8 +11,9 @@ import Msg from './msg.jsx'
 function App() {
   return (
     <>
-      <Msg userName="Alice" textColor="blue" />
-      <ProductTab />
+      <Form />
+      {/* <Msg userName="Alice" textColor="blue" />
+      <ProductTab /> */}
       {/* rendering title component */}
       {/* <Title />   */}
       {/* rendering description component */}
