@@ -1,6 +1,7 @@
 import './App.css'
+import LudoBoard from './LudoBoard.jsx'
 // import LikeButton from './LikeButton.jsx'
-import Counter from './Counter.jsx'
+// import Counter from './Counter.jsx'
 // import ProductTab from './ProductTab.jsx'
 // import Msg from './msg.jsx'
 // import Form from './Form.jsx'
@@ -13,8 +14,10 @@ import Counter from './Counter.jsx'
 function App() {
   return (
     <>
-      <p>Let's Learn States in react</p>
-      <Counter />
+      <LudoBoard />
+    
+      {/* <p>Let's Learn States in react</p> */}
+      {/* <Counter /> */}
       {/* <Form /> */}
       {/* <Msg userName="Alice" textColor="blue" />
       <ProductTab /> */}
