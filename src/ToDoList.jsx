@@ -1,12 +1,13 @@
 import { useState } from 'react';
+import {v4 as uuidv4} from 'uuid';
 
 export default function ToDoList() {
-    let [todos, setTodos] = useState(["Sample Task"]);
-    let [newTask, setNewTask] = useState("");
+    let [todos, setTodos] = useState([{task: "Sample-task", id: uuidv4()}]);
+    let [newTask, setNewTask] = useState("");// To store the value of the input field, In the first render, it will be empty, ""
 
     const addTask = () => {
-        setTodos([...todos, newTask]);
-        setNewTask("");
+        setTodos([...todos, {}, {task: newTask, id: uuidv4()}]);
+        setNewTask("");//To refresh the input field after adding a task
     }
 
     const updatevalue = (event) => {
@@ -24,8 +25,8 @@ export default function ToDoList() {
             <ul>
                 {
                 todos.map((todo) => 
-                <li> 
-                    {todo}
+                <li key = {todo.id}> 
+                    {todo.task}
                 </li>
                 )}
             </ul>
