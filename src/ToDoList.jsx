@@ -6,7 +6,9 @@ export default function ToDoList() {
     let [newTask, setNewTask] = useState("");// To store the value of the input field, In the first render, it will be empty, ""
 
     const addTask = () => {
-        setTodos([...todos, {}, {task: newTask, id: uuidv4()}]);
+        setTodos((prevTodos) => {
+            return [...prevTodos, {task: newTask, id: uuidv4()}]
+        });
         setNewTask("");//To refresh the input field after adding a task
     }
 
