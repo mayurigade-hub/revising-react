@@ -2,12 +2,12 @@ import { useState } from 'react';
 import {v4 as uuidv4} from 'uuid';
 
 export default function ToDoList() {
-    let [todos, setTodos] = useState([{task: "Sample-task", id: uuidv4()}]);
+    let [todos, setTodos] = useState([{task: "Sample-task", id: uuidv4(), isDone: false}]); // To store the list of tasks, In the first render, it will have one sample task
     let [newTask, setNewTask] = useState("");// To store the value of the input field, In the first render, it will be empty, ""
 
     const addTask = () => {
         setTodos((prevTodos) => {
-            return [...prevTodos, {task: newTask, id: uuidv4()}]
+            return [...prevTodos, {task: newTask, id: uuidv4(), isDone: false}];
         });
         setNewTask("");//To refresh the input field after adding a task
     }
@@ -25,19 +25,38 @@ export default function ToDoList() {
         });
     }
 
-    const updateAllToUppercase = () => {
+    // const updateAllToUppercase = () => {
+    //     setTodos((prevTodos) => {
+    //         return prevTodos.map((todo) => {
+    //             return { ...todo, task: todo.task.toUpperCase() };
+    //         });
+    //     });
+    // }
+
+    // const updateOneToUpperCase = (id) => {
+    //     setTodos((prevTodos) => {
+    //         return prevTodos.map((todo) => {
+    //             if (todo.id === id) {
+    //                 return { ...todo, task: todo.task.toUpperCase() };
+    //             }
+    //                 return todo;
+    //         });
+    //     });
+    // }
+
+    const AllMarkAsDone = () => {
         setTodos((prevTodos) => {
             return prevTodos.map((todo) => {
-                return { ...todo, task: todo.task.toUpperCase() };
+                return { ...todo, isDone: true };
             });
         });
     }
 
-    const updateOneToUpperCase = (id) => {
+    const MarkAsDone = (id) => {
         setTodos((prevTodos) => {
             return prevTodos.map((todo) => {
                 if (todo.id === id) {
-                    return { ...todo, task: todo.task.toUpperCase() };
+                    return { ...todo, isDone: true };
                 }
                     return todo;
             });
@@ -60,14 +79,16 @@ export default function ToDoList() {
                 {
                 todos.map((todo) => 
                 <li key = {todo.id}> 
-                    <span> {todo.task} </span>
+                    <span style = {todo.isDone ? {textDecoration: 'line-through'} : {} }> {todo.task} </span>
                     <button onClick = {() => deleteToDo(todo.id)}> Delete task </button>
                     <br></br>
-                    <button onClick = {() => updateOneToUpperCase(todo.id)}> UpperCase </button>
+                    {/* <button onClick = {() => updateOneToUpperCase(todo.id)}> UpperCase </button> */}
+                    <button onClick = {() => MarkAsDone(todo.id)}> Mark as Done </button>
                 </li>
                 )}
             </ul>
-            <button onClick = { updateAllToUppercase }>Uppercase all</button>
+            {/* <button onClick = { updateAllToUppercase }>Uppercase all</button> */}
+            <button onClick = { AllMarkAsDone }>All Mark as Done</button>
         </div>
     )
 }
