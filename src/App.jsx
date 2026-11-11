@@ -1,5 +1,6 @@
 import './App.css'
-import ToDoList from './ToDoList.jsx'
+import Lottery from './Lottery.jsx'
+// import ToDoList from './ToDoList.jsx'
 // import LudoBoard from './LudoBoard.jsx'
 // import LikeButton from './LikeButton.jsx'
 // import Counter from './Counter.jsx'
@@ -15,8 +16,8 @@ import ToDoList from './ToDoList.jsx'
 function App() {
   return (
     <>
-      <ToDoList />
-    
+      <Lottery />
+
       {/* <p>Let's Learn States in react</p> */}
       {/* <Counter /> */}
       {/* <Form /> */}
