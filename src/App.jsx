@@ -1,5 +1,6 @@
 import './App.css'
-import Lottery from './Lottery.jsx'
+import Ticket from './Ticket.jsx'
+// import Lottery from './Lottery.jsx'
 // import ToDoList from './ToDoList.jsx'
 // import LudoBoard from './LudoBoard.jsx'
 // import LikeButton from './LikeButton.jsx'
@@ -16,7 +17,8 @@ import Lottery from './Lottery.jsx'
 function App() {
   return (
     <>
-      <Lottery />
+      <Ticket ticket={[1, 2, 3]} />
+      <Ticket ticket={[1, 2, 3, 4, 5]} />
 
       {/* <p>Let's Learn States in react</p> */}
       {/* <Counter /> */}
