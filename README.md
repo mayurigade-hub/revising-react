@@ -343,3 +343,157 @@ React uses state to make components dynamic. Hooks allow functional components t
 When state changes, React schedules a re-render, executes the component again, and updates the necessary parts of the UI.
 
 **The core concept: State Change → Re-render → UI Update.**
+
+
+# React Forms – Controlled Components
+
+## 1. Introduction
+
+In React, forms are used to collect user input, such as names, email addresses, passwords, etc.
+
+React provides a way to manage form inputs using **State** and **Event Handling**.
+
+## 2. Example Code
+
+```jsx
+import { useState } from "react";
+
+export default function Form() {
+    let [fullName, setFullName] = useState("Mayuri");
+
+    let ChangeHandler = (event) => {
+        setFullName(event.target.value);
+    };
+
+    return (
+        <>
+            <form>
+                <input
+                    placeholder="Enter your name"
+                    type="text"
+                    value={fullName}
+                    onChange={ChangeHandler}
+                />
+
+                <button type="submit">Submit</button>
+            </form>
+        </>
+    );
+}
+```
+
+## 3. Understanding the Code
+
+### Step 1: Initializing State
+
+```jsx
+let [fullName, setFullName] = useState("Mayuri");
+```
+
+- `fullName` is the state variable.
+- `setFullName` is the state updater function.
+- `useState("Mayuri")` initializes the state with the value `"Mayuri"`.
+
+Initially, the input displays `Mayuri`.
+
+### Step 2: Handling Input Changes
+
+```jsx
+let ChangeHandler = (event) => {
+    setFullName(event.target.value);
+};
+```
+
+Whenever the user changes the input, the `onChange` event gets triggered.
+
+The event handler receives an event object.
+
+**Understanding event.target.value:**
+
+- `event` – The event object passed by React.
+- `event.target` – The input element that triggered the event.
+- `event.target.value` – The current value entered in the input field.
+
+### Step 3: Updating State
+
+```jsx
+setFullName(event.target.value);
+```
+
+When the user enters something in the input:
+
+1. `event.target.value` retrieves the latest input value.
+2. `setFullName()` updates the state variable.
+3. React schedules a re-render of the component.
+
+### Step 4: Connecting State with Input
+
+```jsx
+<input
+    type="text"
+    value={fullName}
+    onChange={ChangeHandler}
+/>
+```
+
+Here:
+
+- `value={fullName}` – The input value is controlled by React state.
+- `onChange={ChangeHandler}` – Handles changes made by the user.
+
+Whenever the state changes, the component re-renders and the input displays the updated state value.
+
+## 4. Complete Flow
+
+The execution flow is:
+
+1. Initially, `fullName` contains `"Mayuri"`.
+2. React renders the input with the value `"Mayuri"`.
+3. The user changes the input.
+4. The `onChange` event gets triggered.
+5. `ChangeHandler(event)` executes.
+6. `event.target.value` retrieves the latest input value.
+7. `setFullName()` updates the state.
+8. React schedules a component re-render.
+9. The input displays the updated state value.
+
+## 5. What is a Controlled Component?
+
+A controlled component is a form element whose value is controlled by React state.
+
+Example:
+
+```jsx
+<input
+    value={fullName}
+    onChange={ChangeHandler}
+/>
+```
+
+Two important properties:
+
+| Property | Purpose |
+|---|---|
+| `value` | Connects the input with React state. |
+| `onChange` | Handles changes made by the user. |
+
+Together, they make the input a controlled component.
+
+## 6. Important Concepts to Remember
+
+- `useState()` is used to manage input values.
+- `onChange` is triggered when the input value changes.
+- React passes an event object to the event handler.
+- `event.target.value` retrieves the current input value.
+- The state updater function updates the state.
+- State updates trigger a component re-render.
+- A controlled input gets its value from React state.
+- React re-renders the component, not necessarily the entire page.
+
+## 7. Quick Revision
+
+**Remember this flow:**
+
+`User Input → onChange → Event Handler → setState() → State Update → Re-render → Updated Input`
+
+**Key takeaway:** In a controlled component, React state is the single source of truth for the input value.
