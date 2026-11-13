@@ -1,5 +1,6 @@
 import './App.css'
 import Lottery from './Lottery.jsx'
+import { sum } from './helper.js'
 // import Lottery from './Lottery.jsx'
 // import ToDoList from './ToDoList.jsx'
 // import LudoBoard from './LudoBoard.jsx'
@@ -15,12 +16,16 @@ import Lottery from './Lottery.jsx'
 //import { Title } from './Title.jsx'
 
 function App() {
+    let winCondition = (ticket) => {
+      return sum(ticket) === 15;
+    }
   return (
     <>
-      <Lottery n = {3} winningSum = {15} />
+      <Lottery n = {3} winCondition = { winCondition } />
+       {/* winCondition function is passed as a prop to the Lottery component. The function checks if the sum of the ticket numbers is equal to 15. If it is, then the user wins the lottery. */}
       {/* <p>Let's Learn States in react</p> */}
       {/* <Counter /> */}
-      {/* <Form /> */}
+      {/* <Form /> */}  
       {/* <Msg userName="Alice" textColor="blue" />
       <ProductTab /> */}
       {/* rendering title component */}
