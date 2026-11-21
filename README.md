@@ -497,3 +497,214 @@ Together, they make the input a controlled component.
 `User Input → onChange → Event Handler → setState() → State Update → Re-render → Updated Input`
 
 **Key takeaway:** In a controlled component, React state is the single source of truth for the input value.
+
+# Callback Props in React
+
+## 1. Component Structure
+
+Our application has three components:
+
+- `App.jsx` – Main component that renders ShowComments.
+- `ShowComments.jsx` – Parent component that stores and displays comments.
+- `CommentsForm.jsx` – Child component that collects new comments from the user.
+
+## 2. Where is the State Stored?
+
+In `ShowComments.jsx`:
+
+```jsx
+let [comments, setComments] = useState([
+    {
+        username: "Alice",
+        remarks: "This is a great post!",
+        rating: 5
+    }
+]);
+```
+
+- `comments` stores all comments.
+- `setComments` updates the comments array.
+- Initially, we have one comment from Alice.
+
+**Important:** The parent component owns the comments state.
+
+## 3. Creating the addComment Function
+
+Inside `ShowComments.jsx`:
+
+```jsx
+let addComment = (newComment) => {
+    setComments([...comments, newComment]);
+}
+```
+
+Explanation:
+
+- `addComment` is a function created in the parent.
+- `newComment` is the parameter that receives a new comment.
+- `[...comments, newComment]` creates a new array containing all old comments and the new comment.
+- `setComments()` updates the state.
+
+## 4. Passing the Function to the Child
+
+Inside `ShowComments.jsx`:
+
+```jsx
+<CommentsForm addComment={addComment} />
+```
+
+Here, we pass the parent's function to the child component using props.
+
+Remember:
+
+- Left-side `addComment` = Prop name.
+- Right-side `addComment` = Actual function created in the parent.
+
+## 5. Receiving the Function in the Child
+
+Inside `CommentsForm.jsx`:
+
+```jsx
+export default function CommentsForm({ addComment }) {
+```
+
+The child receives the function through props.
+
+Now the child can call the parent's function!
+
+**Important:** We are not creating a new function here. We are receiving the existing function from the parent.
+
+## 6. Collecting Form Data
+
+Inside `CommentsForm.jsx`:
+
+```jsx
+let [formData, setFormData] = useState({
+    username: "",
+    remarks: "",
+    rating: "5"
+});
+```
+
+The form data is stored in the child's state.
+
+For example, when a user enters:
+
+```js
+{
+    username: "Bob",
+    remarks: "Amazing post!",
+    rating: "4"
+}
+```
+
+This object is stored in `formData`.
+
+## 7. Calling the Parent's Function
+
+Inside the child's `handleSubmit` function:
+
+```jsx
+let handleSubmit = (event) => {
+    event.preventDefault();
+
+    addComment(formData);
+
+    setFormData({
+        username: "",
+        remarks: "",
+        rating: "5"
+    });
+};
+```
+
+This is the most important part!
+
+When the user submits the form:
+
+1. `event.preventDefault()` prevents the browser from reloading the page.
+2. `addComment(formData)` calls the function received from the parent.
+3. The child's formData is passed as an argument.
+4. The parent's `newComment` parameter receives that data.
+5. The parent's `setComments()` updates the comments array.
+6. The form is reset.
+
+## 8. How Does the New Comment Appear?
+
+Inside `ShowComments.jsx`:
+
+```jsx
+{comments.map((comment, index) => (
+    <div key={index}>
+        <p>{comment.remarks} (Rating: {comment.rating})</p>
+        <p>- @{comment.username}</p>
+    </div>
+))}
+```
+
+React's `map()` method displays every comment in the array.
+
+When `setComments()` updates the state, React re-renders the parent component.
+
+The updated array is mapped again, and the new comment appears automatically!
+
+---
+
+## 9. Complete Data Flow
+
+```text
+              App.jsx
+                 |
+                 v
+          ShowComments.jsx
+           (PARENT)
+                 |
+        1. Creates addComment()
+                 |
+        2. Passes function through props
+                 |
+                 v
+          CommentsForm.jsx
+            (CHILD)
+                 |
+        3. Receives addComment()
+                 |
+        4. User fills the form
+                 |
+        5. Calls addComment(formData)
+                 |
+                 v
+          ShowComments.jsx
+                 |
+        6. Receives newComment
+                 |
+        7. setComments([...comments, newComment])
+                 |
+        8. React re-renders component
+                 |
+                 v
+         comments.map()
+                 |
+        9. Displays all comments
+```
+
+## 10. Important React Concepts Learned
+
+| Concept | Meaning |
+|---|---|
+| useState | Stores and manages component state |
+| Props | Passes data or functions from parent to child |
+| Callback Props | Allows a child to call a function provided by its parent |
+| Lifting State Up | Keeps shared state in the common parent |
+| map() | Renders a list of elements |
+| Spread Operator | Copies existing array elements into a new array |
+
+### Golden Rule
+
+**Parent → Child:** Pass functions through props.
+
+**Child → Parent:** Call those functions and pass data as arguments.
+
+The child does not directly modify the parent's state. It asks the parent to update its state by calling the function provided through props.
+
+This pattern is called Callback Props.

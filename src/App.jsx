@@ -1,5 +1,5 @@
 import './App.css'
-import CommentsForm from './CommentsForm.jsx'
+import ShowComments from './ShowComments.jsx'
 // import Forms from './Forms.jsx'
 // import Lottery from './Lottery.jsx'
 // import { sum } from './helper.js'
@@ -23,7 +23,8 @@ function App() {
     // }
   return (
     <>
-      <CommentsForm />
+      <ShowComments />
+      
      {/* <Forms/ > */}
       {/* <Lottery n = {3} winCondition = { winCondition } /> */}
       {/* winCondition function is passed as a prop to the Lottery component. The function checks if the sum of the ticket numbers is equal to 15. If it is, then the user wins the lottery. */}
